@@ -3,10 +3,13 @@ const { default: mongoose } = require('mongoose')
 const jwt = require('jsonwebtoken')
 const User = require('./model/userModel')
 const auth = require('./middleware/auth')
+const session = require('express-session')
 
 const app = express()
-app.use(express.json())
 
+app.use(session({
+    
+}))
 
 app.get('/v1/getall',auth,(req,res) => {
     res.send('All Prod')
@@ -28,7 +31,8 @@ app.post('/v1/login',async(req,res) => {
                     expiresIn:'1h'
                 }
             )
-
+            
+            
             res.status(200).json({ status:'success',token:token})
         }
         else
@@ -38,6 +42,10 @@ app.post('/v1/login',async(req,res) => {
         res.send(error)
     }
 // res.send('sdds')
+})
+
+app.post('/v1/logout',(req,res) => {
+    
 })
 app.post('/v1/createUser',async (req,res) => {
     try {
