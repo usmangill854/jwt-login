@@ -4,8 +4,11 @@ const User = require('./model/userModel')
 const auth = require('./middleware/auth')
 const cookieSession = require('cookie-session')
 const router = require('./routes/userRoutes')
-const app = express()
+const req = require('express/lib/request')
+const cors = require('cors')
 
+const app = express()
+app.use(cors())
 app.use(express.json())
 app.use(cookieSession({
     // name: 'usman',
